@@ -1,17 +1,11 @@
 services:
-  application:
-    image: flask-app
-
-  prometheus:
-    image: nginx:latest
-    ports:services:
     prometheus:
         image: prom/prometheus:latest
         ports:
           - "9090:9090"
         volumes:
           - ./prometheus.yml:/etc/prometheus/prometheus.yml
-          - prom_data:/prometheus 
+          - prom_data:/prometheus
         command: "--config.file=/etc/prometheus/prometheus.yml"
 
     grafana:
@@ -19,12 +13,11 @@ services:
       ports:
         - "3000:3000"
       environment:
-        - GF_SECURITY_ADMIN_USER=admin 
-        - GF_SECURITY_ADMIN_PASSWORD=grafana 
+        - GF_SECURITY_ADMIN_USER=admin
+        - GF_SECURITY_ADMIN_PASSWORD=grafana
       volumes:
         - grafana_data:/var/lib/grafana
-        
+
 volumes:
-  prom_data:
+  prom_data: 
   grafana_data:
-  
